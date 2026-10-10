@@ -1,0 +1,9 @@
+_csv_row,order_id,order_date,customer_id,category,quantity,unit_price_usd,status,issues
+194,ORD-0005,2026-06-25,C003,Software,3,149.00,paid,exact_duplicate_order_id
+195,ORD-9001,2026-08-12,C001,Software,2,95.00,paid,conflicting_order_id
+196,ORD-9001,2026-08-12,C001,Software,4,95.00,paid,conflicting_order_id
+197,ORD-9002,2026-08-04,C999,Supplies,1,24.90,paid,unknown_customer
+198,ORD-9003,2026-02-30,C003,Hardware,1,199.50,paid,invalid_date
+199,ORD-9004,2026-07-21,C004,Services,0,125.00,paid,invalid_quantity
+200,ORD-9005,2026-07-22,C005,Software,3,'-15.00,paid,invalid_unit_price
+201,ORD-9006,2026-07-22,C006,Software,3,49.00,pending,invalid_status

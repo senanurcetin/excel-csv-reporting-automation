@@ -1,0 +1,92 @@
+{
+  "source_rows": 200,
+  "valid_rows": 192,
+  "excluded_rows": 8,
+  "reconciliation_passed": true,
+  "unique_valid_orders": 192,
+  "recognized_revenue_usd": "56975.50",
+  "refunded_order_value_usd": "6724.60",
+  "cancelled_order_value_usd": "6399.50",
+  "paid_or_completed_orders": 159,
+  "refunded_orders": 18,
+  "cancelled_orders": 15,
+  "issues": {
+    "conflicting_order_id": 2,
+    "exact_duplicate_order_id": 1,
+    "invalid_date": 1,
+    "invalid_quantity": 1,
+    "invalid_status": 1,
+    "invalid_unit_price": 1,
+    "unknown_customer": 1
+  },
+  "category_kpis": [
+    {
+      "category": "Hardware",
+      "orders": 58,
+      "recognized_revenue_usd": "24545.60"
+    },
+    {
+      "category": "Services",
+      "orders": 52,
+      "recognized_revenue_usd": "15505.00"
+    },
+    {
+      "category": "Software",
+      "orders": 36,
+      "recognized_revenue_usd": "14771.00"
+    },
+    {
+      "category": "Supplies",
+      "orders": 46,
+      "recognized_revenue_usd": "2153.90"
+    }
+  ],
+  "monthly_kpis": [
+    {
+      "month": "2026-06",
+      "orders": 48,
+      "recognized_revenue_usd": "12603.00"
+    },
+    {
+      "month": "2026-07",
+      "orders": 48,
+      "recognized_revenue_usd": "13594.90"
+    },
+    {
+      "month": "2026-08",
+      "orders": 48,
+      "recognized_revenue_usd": "17437.70"
+    },
+    {
+      "month": "2026-09",
+      "orders": 48,
+      "recognized_revenue_usd": "13339.90"
+    }
+  ],
+  "segment_kpis": [
+    {
+      "segment": "Enterprise",
+      "orders": 59,
+      "recognized_revenue_usd": "19626.60"
+    },
+    {
+      "segment": "Midmarket",
+      "orders": 73,
+      "recognized_revenue_usd": "20953.70"
+    },
+    {
+      "segment": "Small Business",
+      "orders": 60,
+      "recognized_revenue_usd": "16395.20"
+    }
+  ],
+  "business_rules": [
+    "All sample inputs are synthetic; no client data is included.",
+    "Customer IDs and order IDs are case-insensitive and trimmed.",
+    "Paid/completed orders contribute to recognized revenue; refunded/cancelled orders contribute zero.",
+    "Refunded/cancelled order value is displayed separately, not double-subtracted.",
+    "Only YYYY-MM-DD order dates are accepted; prices allow at most two decimal places.",
+    "Conflicting repeated order IDs quarantine all involved rows; exact duplicates retain one row.",
+    "Unknown customers and invalid business-critical fields are excluded and logged."
+  ]
+}

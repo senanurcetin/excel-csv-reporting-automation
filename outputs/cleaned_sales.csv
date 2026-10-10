@@ -1,0 +1,193 @@
+order_id,order_date,customer_id,customer_name,segment,region,category,quantity,unit_price_usd,order_value_usd,status,recognized_revenue_usd
+ORD-0001,2026-06-12,C002,Morgan Taylor,Enterprise,South,Hardware,3,199.50,598.50,paid,598.50
+ORD-0002,2026-07-13,C021,Finley Young,Midmarket,North,Services,2,80.00,160.00,paid,160.00
+ORD-0003,2026-08-13,C019,Dakota Ward,Small Business,East,Supplies,3,24.90,74.70,paid,74.70
+ORD-0004,2026-09-15,C010,Casey Davis,Small Business,South,Hardware,3,49.90,149.70,paid,149.70
+ORD-0005,2026-06-25,C003,Avery Brooks,Midmarket,East,Software,3,149.00,447.00,paid,447.00
+ORD-0006,2026-07-28,C002,Morgan Taylor,Enterprise,South,Supplies,4,24.90,99.60,paid,99.60
+ORD-0007,2026-08-05,C002,Morgan Taylor,Enterprise,South,Supplies,4,12.50,50.00,paid,50.00
+ORD-0008,2026-09-27,C018,Skyler Nguyen,Midmarket,South,Hardware,3,199.50,598.50,completed,598.50
+ORD-0009,2026-06-20,C022,Mason Scott,Small Business,South,Supplies,4,24.90,99.60,paid,99.60
+ORD-0010,2026-07-04,C016,Alex Perry,Small Business,West,Services,3,80.00,240.00,paid,240.00
+ORD-0011,2026-08-01,C018,Skyler Nguyen,Midmarket,South,Software,4,299.00,1196.00,paid,1196.00
+ORD-0012,2026-09-16,C019,Dakota Ward,Small Business,East,Services,2,125.00,250.00,paid,250.00
+ORD-0013,2026-06-21,C003,Avery Brooks,Midmarket,East,Services,3,125.00,375.00,paid,375.00
+ORD-0014,2026-07-22,C001,Harper Stone,Small Business,North,Services,2,80.00,160.00,paid,160.00
+ORD-0015,2026-08-21,C001,Harper Stone,Small Business,North,Services,2,80.00,160.00,paid,160.00
+ORD-0016,2026-09-28,C017,Sydney Cruz,Enterprise,North,Software,1,299.00,299.00,paid,299.00
+ORD-0017,2026-06-26,C013,Reese Price,Small Business,North,Hardware,2,375.00,750.00,paid,750.00
+ORD-0018,2026-07-23,C008,Taylor Rivera,Enterprise,West,Hardware,1,49.90,49.90,paid,49.90
+ORD-0019,2026-08-01,C013,Reese Price,Small Business,North,Supplies,1,12.50,12.50,completed,12.50
+ORD-0020,2026-09-05,C006,Jordan Hall,Midmarket,South,Hardware,4,375.00,1500.00,paid,1500.00
+ORD-0021,2026-06-02,C008,Taylor Rivera,Enterprise,West,Supplies,4,24.90,99.60,completed,99.60
+ORD-0022,2026-07-15,C024,Sage Lee,Midmarket,West,Services,2,220.00,440.00,paid,440.00
+ORD-0023,2026-08-18,C023,Blake Moore,Enterprise,East,Hardware,4,375.00,1500.00,paid,1500.00
+ORD-0024,2026-09-24,C023,Blake Moore,Enterprise,East,Supplies,1,24.90,24.90,completed,24.90
+ORD-0025,2026-06-12,C004,Elliot Chen,Small Business,West,Supplies,2,39.00,78.00,cancelled,0.00
+ORD-0026,2026-07-21,C024,Sage Lee,Midmarket,West,Hardware,3,199.50,598.50,paid,598.50
+ORD-0027,2026-08-12,C012,Jamie Kim,Midmarket,West,Software,1,299.00,299.00,paid,299.00
+ORD-0028,2026-09-08,C002,Morgan Taylor,Enterprise,South,Supplies,1,12.50,12.50,paid,12.50
+ORD-0029,2026-06-11,C016,Alex Perry,Small Business,West,Hardware,1,199.50,199.50,paid,199.50
+ORD-0030,2026-07-08,C014,Cameron Ortiz,Enterprise,South,Supplies,1,39.00,39.00,paid,39.00
+ORD-0031,2026-08-09,C012,Jamie Kim,Midmarket,West,Hardware,4,49.90,199.60,paid,199.60
+ORD-0032,2026-09-01,C017,Sydney Cruz,Enterprise,North,Hardware,3,375.00,1125.00,paid,1125.00
+ORD-0033,2026-06-13,C022,Mason Scott,Small Business,South,Software,4,299.00,1196.00,completed,1196.00
+ORD-0034,2026-07-04,C003,Avery Brooks,Midmarket,East,Software,1,299.00,299.00,paid,299.00
+ORD-0035,2026-08-18,C016,Alex Perry,Small Business,West,Software,4,299.00,1196.00,paid,1196.00
+ORD-0036,2026-09-26,C003,Avery Brooks,Midmarket,East,Services,4,80.00,320.00,paid,320.00
+ORD-0037,2026-06-05,C009,Emery Wright,Midmarket,North,Supplies,2,12.50,25.00,paid,25.00
+ORD-0038,2026-07-03,C018,Skyler Nguyen,Midmarket,South,Software,1,299.00,299.00,paid,299.00
+ORD-0039,2026-08-08,C023,Blake Moore,Enterprise,East,Software,3,299.00,897.00,paid,897.00
+ORD-0040,2026-09-17,C016,Alex Perry,Small Business,West,Hardware,4,375.00,1500.00,cancelled,0.00
+ORD-0041,2026-06-25,C021,Finley Young,Midmarket,North,Hardware,3,199.50,598.50,paid,598.50
+ORD-0042,2026-07-07,C018,Skyler Nguyen,Midmarket,South,Hardware,2,49.90,99.80,completed,99.80
+ORD-0043,2026-08-08,C001,Harper Stone,Small Business,North,Services,4,80.00,320.00,completed,320.00
+ORD-0044,2026-09-27,C021,Finley Young,Midmarket,North,Supplies,2,39.00,78.00,completed,78.00
+ORD-0045,2026-06-09,C007,Quinn Patel,Small Business,East,Supplies,2,24.90,49.80,paid,49.80
+ORD-0046,2026-07-08,C006,Jordan Hall,Midmarket,South,Supplies,4,12.50,50.00,refunded,0.00
+ORD-0047,2026-08-26,C013,Reese Price,Small Business,North,Software,4,299.00,1196.00,refunded,0.00
+ORD-0048,2026-09-20,C013,Reese Price,Small Business,North,Supplies,4,39.00,156.00,paid,156.00
+ORD-0049,2026-06-02,C015,Parker Fox,Midmarket,East,Hardware,2,199.50,399.00,paid,399.00
+ORD-0050,2026-07-23,C007,Quinn Patel,Small Business,East,Hardware,4,199.50,798.00,paid,798.00
+ORD-0051,2026-08-24,C001,Harper Stone,Small Business,North,Services,2,80.00,160.00,completed,160.00
+ORD-0052,2026-09-15,C010,Casey Davis,Small Business,South,Supplies,4,24.90,99.60,paid,99.60
+ORD-0053,2026-06-08,C011,Rowan Evans,Enterprise,East,Hardware,4,375.00,1500.00,paid,1500.00
+ORD-0054,2026-07-15,C006,Jordan Hall,Midmarket,South,Software,1,95.00,95.00,paid,95.00
+ORD-0055,2026-08-09,C021,Finley Young,Midmarket,North,Supplies,3,12.50,37.50,refunded,0.00
+ORD-0056,2026-09-19,C006,Jordan Hall,Midmarket,South,Hardware,4,49.90,199.60,paid,199.60
+ORD-0057,2026-06-14,C022,Mason Scott,Small Business,South,Supplies,2,12.50,25.00,paid,25.00
+ORD-0058,2026-07-04,C011,Rowan Evans,Enterprise,East,Hardware,2,199.50,399.00,paid,399.00
+ORD-0059,2026-08-21,C001,Harper Stone,Small Business,North,Software,1,149.00,149.00,paid,149.00
+ORD-0060,2026-09-08,C012,Jamie Kim,Midmarket,West,Hardware,3,49.90,149.70,paid,149.70
+ORD-0061,2026-06-05,C009,Emery Wright,Midmarket,North,Software,4,149.00,596.00,refunded,0.00
+ORD-0062,2026-07-01,C020,Logan Mitchell,Enterprise,West,Supplies,1,24.90,24.90,refunded,0.00
+ORD-0063,2026-08-03,C009,Emery Wright,Midmarket,North,Supplies,2,12.50,25.00,paid,25.00
+ORD-0064,2026-09-22,C016,Alex Perry,Small Business,West,Software,2,299.00,598.00,paid,598.00
+ORD-0065,2026-06-25,C001,Harper Stone,Small Business,North,Hardware,2,49.90,99.80,paid,99.80
+ORD-0066,2026-07-04,C012,Jamie Kim,Midmarket,West,Software,1,299.00,299.00,paid,299.00
+ORD-0067,2026-08-25,C017,Sydney Cruz,Enterprise,North,Hardware,4,199.50,798.00,paid,798.00
+ORD-0068,2026-09-12,C012,Jamie Kim,Midmarket,West,Software,2,149.00,298.00,paid,298.00
+ORD-0069,2026-06-10,C024,Sage Lee,Midmarket,West,Services,2,220.00,440.00,paid,440.00
+ORD-0070,2026-07-08,C004,Elliot Chen,Small Business,West,Software,3,149.00,447.00,paid,447.00
+ORD-0071,2026-08-23,C013,Reese Price,Small Business,North,Supplies,4,39.00,156.00,paid,156.00
+ORD-0072,2026-09-06,C019,Dakota Ward,Small Business,East,Supplies,1,39.00,39.00,paid,39.00
+ORD-0073,2026-06-25,C015,Parker Fox,Midmarket,East,Hardware,1,375.00,375.00,paid,375.00
+ORD-0074,2026-07-11,C021,Finley Young,Midmarket,North,Hardware,1,375.00,375.00,paid,375.00
+ORD-0075,2026-08-03,C021,Finley Young,Midmarket,North,Services,4,80.00,320.00,cancelled,0.00
+ORD-0076,2026-09-26,C012,Jamie Kim,Midmarket,West,Software,3,95.00,285.00,paid,285.00
+ORD-0077,2026-06-03,C011,Rowan Evans,Enterprise,East,Services,1,80.00,80.00,refunded,0.00
+ORD-0078,2026-07-15,C006,Jordan Hall,Midmarket,South,Hardware,2,199.50,399.00,paid,399.00
+ORD-0079,2026-08-10,C001,Harper Stone,Small Business,North,Services,4,125.00,500.00,paid,500.00
+ORD-0080,2026-09-10,C024,Sage Lee,Midmarket,West,Software,2,149.00,298.00,refunded,0.00
+ORD-0081,2026-06-22,C004,Elliot Chen,Small Business,West,Supplies,3,24.90,74.70,paid,74.70
+ORD-0082,2026-07-22,C011,Rowan Evans,Enterprise,East,Supplies,3,12.50,37.50,paid,37.50
+ORD-0083,2026-08-02,C001,Harper Stone,Small Business,North,Hardware,2,49.90,99.80,paid,99.80
+ORD-0084,2026-09-24,C011,Rowan Evans,Enterprise,East,Hardware,3,375.00,1125.00,paid,1125.00
+ORD-0085,2026-06-08,C006,Jordan Hall,Midmarket,South,Services,1,220.00,220.00,cancelled,0.00
+ORD-0086,2026-07-18,C005,Riley Lopez,Enterprise,North,Services,4,80.00,320.00,paid,320.00
+ORD-0087,2026-08-23,C007,Quinn Patel,Small Business,East,Hardware,3,49.90,149.70,paid,149.70
+ORD-0088,2026-09-14,C005,Riley Lopez,Enterprise,North,Services,2,125.00,250.00,paid,250.00
+ORD-0089,2026-06-17,C009,Emery Wright,Midmarket,North,Hardware,4,199.50,798.00,paid,798.00
+ORD-0090,2026-07-13,C020,Logan Mitchell,Enterprise,West,Supplies,4,39.00,156.00,paid,156.00
+ORD-0091,2026-08-14,C005,Riley Lopez,Enterprise,North,Services,1,125.00,125.00,paid,125.00
+ORD-0092,2026-09-27,C024,Sage Lee,Midmarket,West,Hardware,2,375.00,750.00,paid,750.00
+ORD-0093,2026-06-24,C001,Harper Stone,Small Business,North,Supplies,4,24.90,99.60,paid,99.60
+ORD-0094,2026-07-11,C002,Morgan Taylor,Enterprise,South,Services,4,125.00,500.00,refunded,0.00
+ORD-0095,2026-08-07,C006,Jordan Hall,Midmarket,South,Services,3,220.00,660.00,paid,660.00
+ORD-0096,2026-09-20,C002,Morgan Taylor,Enterprise,South,Software,2,299.00,598.00,paid,598.00
+ORD-0097,2026-06-17,C019,Dakota Ward,Small Business,East,Software,4,149.00,596.00,refunded,0.00
+ORD-0098,2026-07-05,C001,Harper Stone,Small Business,North,Services,3,125.00,375.00,paid,375.00
+ORD-0099,2026-08-08,C003,Avery Brooks,Midmarket,East,Supplies,1,24.90,24.90,cancelled,0.00
+ORD-0100,2026-09-18,C009,Emery Wright,Midmarket,North,Supplies,2,39.00,78.00,paid,78.00
+ORD-0101,2026-06-05,C008,Taylor Rivera,Enterprise,West,Hardware,1,375.00,375.00,paid,375.00
+ORD-0102,2026-07-14,C014,Cameron Ortiz,Enterprise,South,Software,1,95.00,95.00,paid,95.00
+ORD-0103,2026-08-28,C018,Skyler Nguyen,Midmarket,South,Software,1,299.00,299.00,paid,299.00
+ORD-0104,2026-09-08,C016,Alex Perry,Small Business,West,Software,1,149.00,149.00,cancelled,0.00
+ORD-0105,2026-06-14,C015,Parker Fox,Midmarket,East,Hardware,1,375.00,375.00,refunded,0.00
+ORD-0106,2026-07-11,C006,Jordan Hall,Midmarket,South,Services,4,125.00,500.00,completed,500.00
+ORD-0107,2026-08-04,C018,Skyler Nguyen,Midmarket,South,Hardware,2,199.50,399.00,paid,399.00
+ORD-0108,2026-09-15,C010,Casey Davis,Small Business,South,Software,2,95.00,190.00,paid,190.00
+ORD-0109,2026-06-19,C011,Rowan Evans,Enterprise,East,Supplies,1,24.90,24.90,paid,24.90
+ORD-0110,2026-07-12,C015,Parker Fox,Midmarket,East,Services,2,125.00,250.00,paid,250.00
+ORD-0111,2026-08-24,C015,Parker Fox,Midmarket,East,Supplies,2,12.50,25.00,paid,25.00
+ORD-0112,2026-09-20,C011,Rowan Evans,Enterprise,East,Services,2,125.00,250.00,cancelled,0.00
+ORD-0113,2026-06-16,C003,Avery Brooks,Midmarket,East,Supplies,1,24.90,24.90,paid,24.90
+ORD-0114,2026-07-26,C021,Finley Young,Midmarket,North,Services,1,80.00,80.00,paid,80.00
+ORD-0115,2026-08-11,C004,Elliot Chen,Small Business,West,Hardware,2,199.50,399.00,completed,399.00
+ORD-0116,2026-09-10,C011,Rowan Evans,Enterprise,East,Hardware,1,49.90,49.90,completed,49.90
+ORD-0117,2026-06-01,C023,Blake Moore,Enterprise,East,Hardware,3,375.00,1125.00,cancelled,0.00
+ORD-0118,2026-07-10,C024,Sage Lee,Midmarket,West,Supplies,2,12.50,25.00,cancelled,0.00
+ORD-0119,2026-08-23,C014,Cameron Ortiz,Enterprise,South,Services,3,80.00,240.00,paid,240.00
+ORD-0120,2026-09-24,C024,Sage Lee,Midmarket,West,Supplies,2,12.50,25.00,paid,25.00
+ORD-0121,2026-06-26,C012,Jamie Kim,Midmarket,West,Supplies,2,39.00,78.00,refunded,0.00
+ORD-0122,2026-07-24,C023,Blake Moore,Enterprise,East,Hardware,2,199.50,399.00,paid,399.00
+ORD-0123,2026-08-08,C012,Jamie Kim,Midmarket,West,Services,1,220.00,220.00,paid,220.00
+ORD-0124,2026-09-11,C011,Rowan Evans,Enterprise,East,Services,4,220.00,880.00,paid,880.00
+ORD-0125,2026-06-26,C023,Blake Moore,Enterprise,East,Software,3,299.00,897.00,paid,897.00
+ORD-0126,2026-07-23,C019,Dakota Ward,Small Business,East,Software,4,149.00,596.00,paid,596.00
+ORD-0127,2026-08-01,C020,Logan Mitchell,Enterprise,West,Services,3,220.00,660.00,paid,660.00
+ORD-0128,2026-09-23,C001,Harper Stone,Small Business,North,Hardware,4,49.90,199.60,paid,199.60
+ORD-0129,2026-06-02,C013,Reese Price,Small Business,North,Hardware,2,375.00,750.00,completed,750.00
+ORD-0130,2026-07-17,C022,Mason Scott,Small Business,South,Services,1,80.00,80.00,completed,80.00
+ORD-0131,2026-08-02,C023,Blake Moore,Enterprise,East,Services,2,80.00,160.00,completed,160.00
+ORD-0132,2026-09-15,C005,Riley Lopez,Enterprise,North,Supplies,1,12.50,12.50,cancelled,0.00
+ORD-0133,2026-06-05,C022,Mason Scott,Small Business,South,Hardware,3,49.90,149.70,paid,149.70
+ORD-0134,2026-07-15,C024,Sage Lee,Midmarket,West,Services,3,80.00,240.00,paid,240.00
+ORD-0135,2026-08-19,C021,Finley Young,Midmarket,North,Services,4,125.00,500.00,paid,500.00
+ORD-0136,2026-09-06,C008,Taylor Rivera,Enterprise,West,Hardware,3,375.00,1125.00,cancelled,0.00
+ORD-0137,2026-06-01,C011,Rowan Evans,Enterprise,East,Hardware,3,375.00,1125.00,refunded,0.00
+ORD-0138,2026-07-21,C020,Logan Mitchell,Enterprise,West,Hardware,1,49.90,49.90,completed,49.90
+ORD-0139,2026-08-06,C001,Harper Stone,Small Business,North,Hardware,2,199.50,399.00,paid,399.00
+ORD-0140,2026-09-27,C023,Blake Moore,Enterprise,East,Services,3,220.00,660.00,cancelled,0.00
+ORD-0141,2026-06-11,C002,Morgan Taylor,Enterprise,South,Hardware,1,49.90,49.90,paid,49.90
+ORD-0142,2026-07-18,C020,Logan Mitchell,Enterprise,West,Services,2,80.00,160.00,completed,160.00
+ORD-0143,2026-08-13,C003,Avery Brooks,Midmarket,East,Services,3,125.00,375.00,paid,375.00
+ORD-0144,2026-09-27,C023,Blake Moore,Enterprise,East,Services,1,220.00,220.00,paid,220.00
+ORD-0145,2026-06-05,C010,Casey Davis,Small Business,South,Services,4,80.00,320.00,paid,320.00
+ORD-0146,2026-07-27,C003,Avery Brooks,Midmarket,East,Hardware,1,49.90,49.90,refunded,0.00
+ORD-0147,2026-08-17,C021,Finley Young,Midmarket,North,Supplies,1,12.50,12.50,cancelled,0.00
+ORD-0148,2026-09-22,C005,Riley Lopez,Enterprise,North,Supplies,3,39.00,117.00,paid,117.00
+ORD-0149,2026-06-22,C007,Quinn Patel,Small Business,East,Hardware,3,49.90,149.70,paid,149.70
+ORD-0150,2026-07-02,C002,Morgan Taylor,Enterprise,South,Software,1,95.00,95.00,paid,95.00
+ORD-0151,2026-08-21,C003,Avery Brooks,Midmarket,East,Services,1,220.00,220.00,paid,220.00
+ORD-0152,2026-09-01,C008,Taylor Rivera,Enterprise,West,Services,3,125.00,375.00,paid,375.00
+ORD-0153,2026-06-14,C018,Skyler Nguyen,Midmarket,South,Software,2,149.00,298.00,paid,298.00
+ORD-0154,2026-07-12,C005,Riley Lopez,Enterprise,North,Services,4,220.00,880.00,paid,880.00
+ORD-0155,2026-08-06,C002,Morgan Taylor,Enterprise,South,Hardware,4,199.50,798.00,paid,798.00
+ORD-0156,2026-09-11,C002,Morgan Taylor,Enterprise,South,Hardware,3,199.50,598.50,paid,598.50
+ORD-0157,2026-06-20,C007,Quinn Patel,Small Business,East,Hardware,4,199.50,798.00,cancelled,0.00
+ORD-0158,2026-07-25,C024,Sage Lee,Midmarket,West,Software,3,149.00,447.00,paid,447.00
+ORD-0159,2026-08-17,C015,Parker Fox,Midmarket,East,Services,1,220.00,220.00,paid,220.00
+ORD-0160,2026-09-14,C009,Emery Wright,Midmarket,North,Supplies,1,39.00,39.00,paid,39.00
+ORD-0161,2026-06-28,C024,Sage Lee,Midmarket,West,Services,4,125.00,500.00,paid,500.00
+ORD-0162,2026-07-08,C024,Sage Lee,Midmarket,West,Software,2,149.00,298.00,paid,298.00
+ORD-0163,2026-08-20,C001,Harper Stone,Small Business,North,Software,3,299.00,897.00,paid,897.00
+ORD-0164,2026-09-03,C010,Casey Davis,Small Business,South,Supplies,1,12.50,12.50,paid,12.50
+ORD-0165,2026-06-04,C022,Mason Scott,Small Business,South,Services,1,125.00,125.00,completed,125.00
+ORD-0166,2026-07-24,C015,Parker Fox,Midmarket,East,Services,4,125.00,500.00,paid,500.00
+ORD-0167,2026-08-09,C009,Emery Wright,Midmarket,North,Software,4,149.00,596.00,paid,596.00
+ORD-0168,2026-09-12,C003,Avery Brooks,Midmarket,East,Supplies,1,24.90,24.90,completed,24.90
+ORD-0169,2026-06-22,C011,Rowan Evans,Enterprise,East,Services,2,220.00,440.00,paid,440.00
+ORD-0170,2026-07-14,C003,Avery Brooks,Midmarket,East,Services,4,220.00,880.00,paid,880.00
+ORD-0171,2026-08-13,C020,Logan Mitchell,Enterprise,West,Software,4,149.00,596.00,paid,596.00
+ORD-0172,2026-09-11,C013,Reese Price,Small Business,North,Software,3,95.00,285.00,paid,285.00
+ORD-0173,2026-06-17,C009,Emery Wright,Midmarket,North,Hardware,1,375.00,375.00,refunded,0.00
+ORD-0174,2026-07-23,C010,Casey Davis,Small Business,South,Hardware,4,375.00,1500.00,paid,1500.00
+ORD-0175,2026-08-10,C004,Elliot Chen,Small Business,West,Supplies,2,24.90,49.80,paid,49.80
+ORD-0176,2026-09-15,C012,Jamie Kim,Midmarket,West,Supplies,4,24.90,99.60,cancelled,0.00
+ORD-0177,2026-06-17,C001,Harper Stone,Small Business,North,Hardware,3,49.90,149.70,paid,149.70
+ORD-0178,2026-07-12,C007,Quinn Patel,Small Business,East,Software,3,95.00,285.00,paid,285.00
+ORD-0179,2026-08-13,C009,Emery Wright,Midmarket,North,Services,3,220.00,660.00,paid,660.00
+ORD-0180,2026-09-18,C005,Riley Lopez,Enterprise,North,Services,1,125.00,125.00,paid,125.00
+ORD-0181,2026-06-16,C010,Casey Davis,Small Business,South,Supplies,4,24.90,99.60,paid,99.60
+ORD-0182,2026-07-25,C010,Casey Davis,Small Business,South,Supplies,2,24.90,49.80,refunded,0.00
+ORD-0183,2026-08-09,C013,Reese Price,Small Business,North,Hardware,1,49.90,49.90,paid,49.90
+ORD-0184,2026-09-18,C001,Harper Stone,Small Business,North,Hardware,2,375.00,750.00,paid,750.00
+ORD-0185,2026-06-21,C014,Cameron Ortiz,Enterprise,South,Services,4,80.00,320.00,refunded,0.00
+ORD-0186,2026-07-26,C016,Alex Perry,Small Business,West,Supplies,3,24.90,74.70,paid,74.70
+ORD-0187,2026-08-14,C018,Skyler Nguyen,Midmarket,South,Hardware,3,49.90,149.70,paid,149.70
+ORD-0188,2026-09-01,C008,Taylor Rivera,Enterprise,West,Services,2,220.00,440.00,paid,440.00
+ORD-0189,2026-06-08,C002,Morgan Taylor,Enterprise,South,Hardware,3,199.50,598.50,refunded,0.00
+ORD-0190,2026-07-04,C011,Rowan Evans,Enterprise,East,Services,3,125.00,375.00,refunded,0.00
+ORD-0191,2026-08-11,C020,Logan Mitchell,Enterprise,West,Hardware,4,199.50,798.00,paid,798.00
+ORD-0192,2026-09-20,C009,Emery Wright,Midmarket,North,Supplies,2,12.50,25.00,paid,25.00
