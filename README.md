@@ -4,6 +4,11 @@
 
 A Python workflow takes inconsistent order exports (`sales.csv`) plus a customer reference workbook (`customers.xlsx`), validates business-critical data, joins records and exports a ready-to-review KPI pack. **All data and customer names in this repository are synthetic.**
 
+[![Python CI](https://github.com/senanurcetin/excel-csv-reporting-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/senanurcetin/excel-csv-reporting-automation/actions/workflows/ci.yml)
+
+**[Live KPI Dashboard](https://excel-csv-reporting-automation.vercel.app/)** · **[GitHub Actions CI](https://github.com/senanurcetin/excel-csv-reporting-automation/actions/workflows/ci.yml)**
+
+The hosted page is a static dashboard built from synthetic sample data. To process new Excel/CSV files, run the Python workflow locally or in an authorized environment.
 ## What the client receives
 
 | Artifact | Purpose |
