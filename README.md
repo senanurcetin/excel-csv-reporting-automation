@@ -71,6 +71,8 @@ The bundled sample contains **200 source rows**, of which **192 are valid and 8 
 
 See [`PILOT_SCOPE.md`](PILOT_SCOPE.md) for a client-facing fixed-scope handoff and acceptance checklist.
 
+**Reproducible handoff:** [Input/output contracts, synthetic reconciliation and acceptance evidence](docs/PILOT_HANDOFF.md).
+
 ## Project layout
 
 ```text
