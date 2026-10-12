@@ -73,6 +73,8 @@ See [`PILOT_SCOPE.md`](PILOT_SCOPE.md) for a client-facing fixed-scope handoff a
 
 **Reproducible handoff:** [Input/output contracts, synthetic reconciliation and acceptance evidence](docs/PILOT_HANDOFF.md).
 
+**Release readiness:** [Candidate notes and acceptance checks](docs/RELEASE_NOTES_CANDIDATE.md) — these are not an already published GitHub Release.
+
 ## Project layout
 
 ```text
