@@ -25,7 +25,8 @@ The committed synthetic sample contains 200 source rows, 192 valid rows and 8 ex
 - [ ] Confirm the selected target commit and verify the README accurately describes it.
 - [ ] Run `python run_demo.py` on the committed synthetic sample.
 - [ ] Run `python -m pytest -q` and review the results.
-- [ ] Reconcile input/valid/excluded counts, revenue and category/segment/month totals.
+- [x] Independently reconcile the **committed example outputs**, including input/valid/excluded counts, revenue, category/segment/month aggregates and status categories. Verified against six checked-in output files on 12 October 2026; all eight consistency checks passed. Re-run with `python scripts/verify_release_evidence.py`. This verifies stored outputs, **not** regeneration from original CSV/Excel inputs.
+- [ ] Independently rerun the pipeline from original synthetic input files and confirm the generated output still matches.
 - [ ] Inspect the dependency and licensing policy; decide explicitly whether to publish a software license.
 - [ ] After validation, create the reviewed GitHub Release using these notes; do not represent this candidate as already published.
 
