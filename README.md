@@ -1,5 +1,10 @@
 # Excel/CSV Reporting Automation — Paid Pilot Demo
 
+![Excel CSV automated reporting workflow](docs/reporting-pipeline.svg)
+
+> This diagram illustrates the data workflow. The paid-pilot sample datasets and entities are **synthetic**, not client data.
+
+
 **One small, auditable, white-label deliverable for BI and software agencies.**
 
 A Python workflow takes inconsistent order exports (`sales.csv`) plus a customer reference workbook (`customers.xlsx`), validates business-critical data, joins records and exports a ready-to-review KPI pack. **All data and customer names in this repository are synthetic.**
