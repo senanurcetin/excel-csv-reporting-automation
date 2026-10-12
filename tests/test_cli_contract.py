@@ -66,7 +66,7 @@ def test_cli_missing_sales_file_exits_two_without_false_success(tmp_path, monkey
 
 def test_cli_bad_sales_schema_exits_two_without_false_success(tmp_path, monkeypatch, capsys):
     bad_sales = tmp_path / "bad-schema.csv"
-    bad_sales.write_text("order_id,quantity\\nORD-1,1\\n", encoding="utf-8")
+    bad_sales.write_text("order_id,quantity\nORD-1,1\n", encoding="utf-8")
     output = tmp_path / "reports"
 
     with pytest.raises(SystemExit) as exc:
