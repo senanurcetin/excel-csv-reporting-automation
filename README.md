@@ -1,5 +1,7 @@
 # Excel/CSV Reporting Automation — Paid Pilot Demo
 
+**Reviewer quick brief:** [Project scope, inspectable evidence and limitations](docs/hiring-summary.md).
+
 ![Excel CSV automated reporting workflow](docs/reporting-pipeline.svg)
 
 > This diagram illustrates the data workflow. The paid-pilot sample datasets and entities are **synthetic**, not client data.
