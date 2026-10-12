@@ -75,6 +75,8 @@ See [`PILOT_SCOPE.md`](PILOT_SCOPE.md) for a client-facing fixed-scope handoff a
 
 **Release readiness:** [Candidate notes and acceptance checks](docs/RELEASE_NOTES_CANDIDATE.md) — these are not an already published GitHub Release.
 
+**Checked-in output verification:** `python scripts/verify_release_evidence.py` independently checks synthetic row counts, revenue totals, status treatment and group aggregates using only Python's standard library.
+
 ## Project layout
 
 ```text
