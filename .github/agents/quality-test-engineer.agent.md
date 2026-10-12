@@ -3,6 +3,8 @@ name: Quality Test Engineer
 description: Write focused, deterministic regression tests for CSV/Excel data pipelines and CLI error handling without touching production data or expensive CI workflows.
 user-invocable: true
 disable-model-invocation: true
+include-custom-instructions: true
+tools: ["read", "search", "edit", "execute"]
 ---
 
 # Mission
