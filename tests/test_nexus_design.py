@@ -18,6 +18,12 @@ class NexusReportingDesignTests(unittest.TestCase):
             self.assertIn("SYNTHETIC DATA ONLY", html)
             self.assertIn("Revenue policy & controls", html)
             self.assertIn("prefers-reduced-motion", html)
+        for source_or_html in (source,
+                               (ROOT / "outputs/index.html").read_text(encoding="utf-8"),
+                               (ROOT / "outputs/dashboard.html").read_text(encoding="utf-8")):
+            self.assertIn('class="barlabel" title=', source_or_html)
+            self.assertIn('aria-hidden="true"', source_or_html)
+            self.assertIn("max-width:460px", source_or_html)
         self.assertIn("NEXUS / SALES DATA INTELLIGENCE", source)
         self.assertIn("prefers-reduced-motion", source)
 
