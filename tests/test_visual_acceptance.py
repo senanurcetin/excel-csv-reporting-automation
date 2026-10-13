@@ -1,7 +1,7 @@
 """Real-browser acceptance for the self-contained, generated NEXUS report.
 
 Run locally (no hosted CI):
-    python -m unittest tests.test_visual_acceptance -v
+    python -m unittest discover -s tests -p 'test_visual_acceptance.py' -v
 
 If Playwright or its Chromium binary is not installed the suite is skipped.
 To capture *actual* screenshots, set E2E_SCREENSHOT_DIR to a local folder.
