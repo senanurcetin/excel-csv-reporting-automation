@@ -79,7 +79,10 @@ h2 {{ font-size:17px; color:#eaf4ff; letter-spacing:-.015em; }}
 }}
 .card {{ border-top:2px solid #4ea8ff; min-height:134px; }}
 .card:nth-child(2) {{ border-top-color:#8f9bff; }}
-.card:nth-child(4) {{ border-top-color:#43c99d; }}
+.card.reconciliation-pass {{ border-top-color:#43c99d; }}
+.card.reconciliation-fail {{ border-top-color:#f37a88; }}
+.card.reconciliation-pass strong {{ color:#8ae6bb; }}
+.card.reconciliation-fail strong {{ color:#ffc2cb; }}
 .card span {{ color:#aac3e0; font-weight:650; }}
 .card strong {{ color:#f4f9ff; font-size:clamp(23px,2.3vw,30px); font-variant-numeric:tabular-nums; }}
 .card small {{ color:#b5cbe5; }}
@@ -106,7 +109,7 @@ code {{ background:#173c5b; color:#c8e3ff; border-radius:5px; }}
 <div class="card"><span>Recognized revenue</span><strong>${revenue:,.2f}</strong><small>USD · paid / completed only</small></div>
 <div class="card"><span>Valid sales records</span><strong>{data['valid_rows']:,}</strong><small>{quality_rate:.1f}% of source rows</small></div>
 <div class="card"><span>Excluded records</span><strong>{data['excluded_rows']:,}</strong><small>Every exclusion is logged</small></div>
-<div class="card"><span>Reconciliation</span><strong>{'PASS' if data['reconciliation_passed'] else 'FAIL'}</strong><small>Valid + excluded = {data['source_rows']:,} input rows</small></div>
+<div class="card reconciliation-{'pass' if data['reconciliation_passed'] else 'fail'}"><span>Reconciliation</span><strong>{'PASS' if data['reconciliation_passed'] else 'FAIL'}</strong><small>Valid + excluded = {data['source_rows']:,} input rows</small></div>
 </div>
 <div class="sections"><section class="panel"><h2>Revenue by month</h2>{chart_rows(data['monthly_kpis'],'month')}</section><section class="panel"><h2>Revenue by category</h2>{chart_rows(data['category_kpis'],'category')}</section></div>
 <div class="sections"><section class="panel"><h2>Revenue by segment</h2>{chart_rows(data['segment_kpis'],'segment')}</section><section class="panel"><h2>Quality issues</h2><table><thead><tr><th>Issue</th><th class="num">Affected rows</th></tr></thead><tbody>{issue_rows(data['issues'])}</tbody></table><p class="small">A single rejected record may have multiple issues.</p></section></div>

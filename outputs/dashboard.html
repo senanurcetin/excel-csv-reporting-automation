@@ -50,7 +50,10 @@ h2 { font-size:17px; color:#eaf4ff; letter-spacing:-.015em; }
 }
 .card { border-top:2px solid #4ea8ff; min-height:134px; }
 .card:nth-child(2) { border-top-color:#8f9bff; }
-.card:nth-child(4) { border-top-color:#43c99d; }
+.card.reconciliation-pass { border-top-color:#43c99d; }
+.card.reconciliation-fail { border-top-color:#f37a88; }
+.card.reconciliation-pass strong { color:#8ae6bb; }
+.card.reconciliation-fail strong { color:#ffc2cb; }
 .card span { color:#aac3e0; font-weight:650; }
 .card strong { color:#f4f9ff; font-size:clamp(23px,2.3vw,30px); font-variant-numeric:tabular-nums; }
 .card small { color:#b5cbe5; }
@@ -77,7 +80,7 @@ code { background:#173c5b; color:#c8e3ff; border-radius:5px; }
 <div class="card"><span>Recognized revenue</span><strong>$56,975.50</strong><small>USD · paid / completed only</small></div>
 <div class="card"><span>Valid sales records</span><strong>192</strong><small>96.0% of source rows</small></div>
 <div class="card"><span>Excluded records</span><strong>8</strong><small>Every exclusion is logged</small></div>
-<div class="card"><span>Reconciliation</span><strong>PASS</strong><small>Valid + excluded = 200 input rows</small></div>
+<div class="card reconciliation-pass"><span>Reconciliation</span><strong>PASS</strong><small>Valid + excluded = 200 input rows</small></div>
 </div>
 <div class="sections"><section class="panel"><h2>Revenue by month</h2><div class="barrow"><span class="barlabel">2026-06</span><span class="bartrack"><span class="barfill" style="width:72.3%"></span></span><b>$12,603.00</b></div>
 <div class="barrow"><span class="barlabel">2026-07</span><span class="bartrack"><span class="barfill" style="width:78.0%"></span></span><b>$13,594.90</b></div>
