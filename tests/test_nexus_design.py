@@ -30,6 +30,16 @@ class NexusReportingDesignTests(unittest.TestCase):
         self.assertIn('class="nexus-sales-brand"', source)
         self.assertIn("SYNTHETIC SALES REPORT", source)
         self.assertIn("prefers-reduced-motion", source)
+        # Screen surfaces are midnight navy, but physical/PDF export is white.
+        # The final print rule must explicitly restore dark amounts, labels and captions.
+        for report in (source,
+                       (ROOT / "outputs/index.html").read_text(encoding="utf-8"),
+                       (ROOT / "outputs/dashboard.html").read_text(encoding="utf-8")):
+            self.assertIn("Print fidelity: later screen colors", report)
+            self.assertIn(".card small,.card strong,.barrow b,.barlabel", report)
+            self.assertIn("color:#132c44!important", report)
+            self.assertIn(".panel { min-width:0; overflow-x:auto; }", report)
+
 
     def test_mutual_reconciliation_semantics_always_match_data(self):
         summary = json.loads((ROOT / "outputs/validation_summary.json").read_text(encoding="utf-8"))

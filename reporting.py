@@ -153,6 +153,25 @@ code {{ background:#173c5b; color:#c8e3ff; border-radius:5px; }}
  .nexus-sales-mark {{ color:#153b60!important;background:#edf3f9!important;box-shadow:none!important; }}
 }}
 
+
+/* Print fidelity: later screen colors must never override readable ink. */
+.panel {{ min-width:0; overflow-x:auto; }}
+@media print {{
+  body,main {{ background:#fff!important; color:#132c44!important; }}
+  .top,.card,.panel {{ background:#fff!important; color:#132c44!important; border:1px solid #b8cbdc!important; box-shadow:none!important; }}
+  .card small,.card strong,.barrow b,.barlabel,.kicker,.sub,.small,
+  .top .kicker,.nexus-sales-wordmark,.nexus-sales-brandline,
+  .panel h2,.footer,.panel th,.panel td {{
+    color:#132c44!important;
+    opacity:1!important;
+  }}
+  .bartrack {{ border:1px solid #a6bcd1!important;background:#eff4f9!important; }}
+  .barfill {{ background:#4d7fae!important;box-shadow:none!important; }}
+  .top .sub code,code {{ background:#f1f5fa!important;color:#123653!important; }}
+  .panel {{ overflow:visible!important;break-inside:avoid; }}
+  .card {{ min-height:0!important; }}
+}}
+
 </style></head><body><main>
 <div class="top"><div><div class="nexus-sales-brand">
   <span class="nexus-sales-mark" aria-hidden="true">NX</span>
