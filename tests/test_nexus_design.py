@@ -16,6 +16,9 @@ class NexusReportingDesignTests(unittest.TestCase):
             self.assertIn("#071829", html)
             self.assertIn("#4ea8ff", html)
             self.assertIn("SYNTHETIC DATA ONLY", html)
+            self.assertIn('class="nexus-sales-brand"', html)
+            self.assertIn('class="nexus-sales-mark"', html)
+            self.assertIn("DATA INTELLIGENCE / CLIENT REPORTING", html)
             self.assertIn("Revenue policy & controls", html)
             self.assertIn("prefers-reduced-motion", html)
         for source_or_html in (source,
@@ -24,7 +27,8 @@ class NexusReportingDesignTests(unittest.TestCase):
             self.assertIn('class="barlabel" title=', source_or_html)
             self.assertIn('aria-hidden="true"', source_or_html)
             self.assertIn("max-width:460px", source_or_html)
-        self.assertIn("NEXUS / SALES DATA INTELLIGENCE", source)
+        self.assertIn('class="nexus-sales-brand"', source)
+        self.assertIn("SYNTHETIC SALES REPORT", source)
         self.assertIn("prefers-reduced-motion", source)
 
     def test_mutual_reconciliation_semantics_always_match_data(self):
