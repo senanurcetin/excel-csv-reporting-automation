@@ -41,6 +41,15 @@ class NexusReportingDesignTests(unittest.TestCase):
             self.assertIn(".panel { min-width:0; overflow-x:auto; }", report)
 
 
+    def test_published_nexus_reports_share_one_reproducible_visual(self):
+        index = (ROOT / "outputs/index.html").read_bytes()
+        dashboard = (ROOT / "outputs/dashboard.html").read_bytes()
+        self.assertEqual(index, dashboard)
+        html = index.decode("utf-8")
+        self.assertIn("NEXUS | Sales Data Intelligence", html)
+        self.assertIn('name="theme-color" content="#071829"', html)
+        self.assertIn("synthetic sales intelligence reporting", html)
+
     def test_mutual_reconciliation_semantics_always_match_data(self):
         summary = json.loads((ROOT / "outputs/validation_summary.json").read_text(encoding="utf-8"))
         passing = build_html(summary)

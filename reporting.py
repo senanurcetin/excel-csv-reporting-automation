@@ -29,7 +29,9 @@ def build_html(data: dict) -> str:
     quality_rate = (100 * data["valid_rows"] / data["source_rows"]) if data["source_rows"] else 0
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sales Reporting Automation | Synthetic Demo</title>
+<title>NEXUS | Sales Data Intelligence — Synthetic Report</title>
+<meta name="theme-color" content="#071829">
+<meta name="description" content="NEXUS synthetic sales intelligence reporting: reconciled revenue, quality controls and segment analytics.">
 <style>
 :root{{--bg:#f3f6fa;--ink:#152536;--muted:#64758b;--brand:#137b7d;--border:#dae3eb}}
 *{{box-sizing:border-box}}body{{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);margin:0}}
