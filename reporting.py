@@ -12,7 +12,7 @@ def chart_rows(items: list[dict], name_key: str) -> str:
         value = Decimal(x["recognized_revenue_usd"])
         width = float(value / maximum * 100) if maximum > 0 else 0
         label = escape(str(x[name_key]))
-        chunks.append(f'<div class="barrow"><span class="barlabel">{label}</span><span class="bartrack"><span class="barfill" style="width:{width:.1f}%"></span></span><b>${value:,.2f}</b></div>')
+        chunks.append(f'<div class="barrow"><span class="barlabel" title="{label}">{label}</span><span class="bartrack" aria-hidden="true"><span class="barfill" style="width:{width:.1f}%"></span></span><b>${value:,.2f}</b></div>')
     return "\n".join(chunks) if chunks else "<p>No values available.</p>"
 
 
@@ -29,7 +29,9 @@ def build_html(data: dict) -> str:
     quality_rate = (100 * data["valid_rows"] / data["source_rows"]) if data["source_rows"] else 0
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sales Reporting Automation | Synthetic Demo</title>
+<title>NEXUS | Sales Data Intelligence — Synthetic Report</title>
+<meta name="theme-color" content="#071829">
+<meta name="description" content="NEXUS synthetic sales intelligence reporting: reconciled revenue, quality controls and segment analytics.">
 <style>
 :root{{--bg:#f3f6fa;--ink:#152536;--muted:#64758b;--brand:#137b7d;--border:#dae3eb}}
 *{{box-sizing:border-box}}body{{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);margin:0}}
@@ -43,13 +45,145 @@ main{{max-width:1120px;margin:auto;padding:38px 24px 65px}}.top{{display:flex;al
 table{{width:100%;border-collapse:collapse;font-size:13px}}td,th{{text-align:left;padding:10px 0;border-bottom:1px solid #edf1f4}}th{{color:var(--muted);font-weight:600}}.num{{text-align:right}}.footer{{font-size:12px;color:var(--muted);margin-top:18px}}code{{background:#eef2f6;padding:2px 5px;border-radius:3px}}
 @media(max-width:760px){{.grid{{grid-template-columns:repeat(2,1fr)}}.sections{{grid-template-columns:1fr}}main{{padding:22px 15px}}.barrow{{grid-template-columns:92px 1fr 78px;gap:8px}}h1{{font-size:27px}}}}
 @media print{{body{{background:white}}main{{max-width:none}}.card,.panel{{box-shadow:none;break-inside:avoid}}}}
+/* NEXUS executive reporting system: keeps the generated file self-contained. */
+:root {{ --bg:#071829; --ink:#eff5ff; --muted:#aec6df; --brand:#4ea8ff; --border:#294767; }}
+body {{
+  background: radial-gradient(ellipse at 87% 0%, rgba(78,168,255,.15), transparent 40%),
+              radial-gradient(ellipse at 15% 90%, rgba(143,155,255,.07), transparent 42%),
+              var(--bg);
+}}
+main {{ max-width:1260px; padding-top:28px; }}
+.top {{
+  position:relative; overflow:hidden;
+  padding:25px 28px;
+  border:1px solid #31577e;
+  border-radius:18px;
+  background:linear-gradient(115deg,#143958 0%,#0c2944 55%,#0a1b33 100%);
+  box-shadow:0 18px 43px rgba(0,8,20,.27);
+}}
+.top:after {{
+  content:"";pointer-events:none;position:absolute;top:-180px;right:-75px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(78,168,255,.23),transparent 70%);
+}}
+.kicker {{ color:#95caff; font-size:11px; letter-spacing:.15em; }}
+h1 {{ letter-spacing:-.04em; font-size:clamp(27px,3vw,38px); color:#f3f9ff; font-weight:780; }}
+h2 {{ font-size:17px; color:#eaf4ff; letter-spacing:-.015em; }}
+.sub {{ color:#bdd2e9; }}
+.tag {{ background:rgba(7,26,46,.74);border-color:#4a81b5;color:#d6e9fd;border-radius:8px;letter-spacing:.055em; }}
+.grid {{ margin:23px 0 25px; gap:13px; }}
+.card,.panel {{
+  background:linear-gradient(145deg,#133450,#0d263f);
+  color:#eaf4ff;
+  border:1px solid #31577b;
+  border-radius:16px;
+  box-shadow:0 14px 30px rgba(1,7,19,.2),inset 0 1px 0 rgba(190,215,250,.065);
+}}
+.card {{ border-top:2px solid #4ea8ff; min-height:134px; }}
+.card:nth-child(2) {{ border-top-color:#8f9bff; }}
+.card.reconciliation-pass {{ border-top-color:#43c99d; }}
+.card.reconciliation-fail {{ border-top-color:#f37a88; }}
+.card.reconciliation-pass strong {{ color:#8ae6bb; }}
+.card.reconciliation-fail strong {{ color:#ffc2cb; }}
+.card span {{ color:#aac3e0; font-weight:650; }}
+.card strong {{ color:#f4f9ff; font-size:clamp(23px,2.3vw,30px); font-variant-numeric:tabular-nums; }}
+.card small {{ color:#b5cbe5; }}
+.sections {{ gap:15px; }}
+.panel {{ padding:clamp(17px,2vw,25px); }}
+.bartrack {{ background:#0a1f35; height:13px; }}
+.barfill {{ background:linear-gradient(90deg,#267bd2,#8f9bff); }}
+.barrow b {{ font-variant-numeric:tabular-nums; }}
+td,th {{ border-bottom:1px solid #285071; }}
+th {{ color:#b7cde5; }}
+.footer {{ color:#b1cbe3; }}
+code {{ background:#173c5b; color:#c8e3ff; border-radius:5px; }}
+@media(max-width:760px) {{ main{{padding:14px 12px 35px}}.top{{padding:20px 16px}}.grid{{gap:9px}} .card{{padding:13px;min-height:115px}} }}
+@media(prefers-reduced-motion:reduce) {{ *,*::before,*::after {{ animation-duration:.01ms!important; transition-duration:.01ms!important; }} }}
+@media print {{
+  body {{ color:#0c2340; background:white!important; }}
+  .top,.card,.panel {{ background:#fff!important; color:#0c2340!important; border-color:#a6bbd1!important; box-shadow:none!important; }}
+  h1,h2,.card strong,.card span,.barrow b,td,th,.sub,.footer {{ color:#0c2340!important; }}
+  .tag {{ color:#0c2340!important; background:#f2f7fc!important; }}
+}}
+
+/* Dense executive revenue charts: complete labels remain available on hover,
+   while decorative bars never duplicate the actual dollar amount for AT. */
+.barrow {{ border-bottom:1px solid rgba(127,171,217,.13); padding:5px 0 9px; gap:clamp(8px,1vw,15px); }}
+.barrow:last-child {{ border-bottom:0; }}
+.barlabel {{ color:#d4e5f7; font-size:12px; font-weight:600; }}
+.barrow b {{ color:#eff7ff; font-size:12px; font-variant-numeric:tabular-nums; }}
+.bartrack {{ border:1px solid #254867; box-shadow:inset 0 1px 3px rgba(0,5,18,.33); }}
+.barfill {{ border-radius:7px; box-shadow:0 0 10px rgba(78,168,255,.12); }}
+.panel table {{ font-variant-numeric:tabular-nums; }}
+.panel th {{ text-transform:uppercase; letter-spacing:.065em; font-size:11px; }}
+.panel td {{ line-height:1.5; }}
+@media(max-width:460px) {{
+  .barrow {{ grid-template-columns:minmax(66px,85px) minmax(0,1fr) minmax(66px,85px); gap:7px; }}
+  .barlabel {{ font-size:11px; }}
+  .barrow b {{ font-size:10px; letter-spacing:-.02em; }}
+}}
+@media print {{
+  .barrow {{ border-bottom:1px solid #d8e5ee!important; }}
+  .bartrack {{ background:#edf3f9!important; border:1px solid #b8cbdc!important;box-shadow:none!important; }}
+  .barfill {{ background:#327bbd!important; box-shadow:none!important; }}
+  .barlabel {{ color:#123351!important; }}
+}}
+
+
+/* NEXUS portfolio cover identity carried by the actual generated HTML. */
+.nexus-sales-brand {{ display:inline-flex; align-items:center;gap:12px;margin-bottom:14px; }}
+.nexus-sales-mark {{
+ display:inline-flex;align-items:center;justify-content:center;
+ width:43px;height:43px;flex:0 0 43px;
+ background:linear-gradient(135deg,#327bc8,#263878);
+ border:1px solid rgba(160,198,255,.45);border-radius:12px;
+ box-shadow:0 0 0 5px rgba(78,168,255,.075);
+ color:#f6faff;font-size:13px;font-weight:850;letter-spacing:.015em;
+}}
+.nexus-sales-wordmark {{ color:#94ceff;font-size:11px;font-weight:850;letter-spacing:.22em; }}
+.nexus-sales-brandline {{ color:#b8d2ee;font-size:9px;font-weight:720;letter-spacing:.095em;margin-top:4px; }}
+.top .kicker {{ margin:8px 0 4px;color:#a9bdff; }}
+.top .sub code {{ color:#bde0ff; background:rgba(19,54,89,.84); }}
+@media(max-width:680px) {{
+  .nexus-sales-mark {{ width:37px;height:37px;flex-basis:37px; }}
+  .nexus-sales-brand {{ gap:10px;margin-bottom:10px; }}
+  .nexus-sales-wordmark {{ font-size:10px; }}
+  .nexus-sales-brandline {{ font-size:8px;letter-spacing:.05em; }}
+}}
+@media print {{
+ .nexus-sales-wordmark,.nexus-sales-brandline {{ color:#153b60!important; }}
+ .nexus-sales-mark {{ color:#153b60!important;background:#edf3f9!important;box-shadow:none!important; }}
+}}
+
+
+/* Print fidelity: later screen colors must never override readable ink. */
+.panel {{ min-width:0; overflow-x:auto; }}
+@media print {{
+  body,main {{ background:#fff!important; color:#132c44!important; }}
+  .top,.card,.panel {{ background:#fff!important; color:#132c44!important; border:1px solid #b8cbdc!important; box-shadow:none!important; }}
+  .card small,.card strong,.barrow b,.barlabel,.kicker,.sub,.small,
+  .top .kicker,.nexus-sales-wordmark,.nexus-sales-brandline,
+  .panel h2,.footer,.panel th,.panel td {{
+    color:#132c44!important;
+    opacity:1!important;
+  }}
+  .bartrack {{ border:1px solid #a6bcd1!important;background:#eff4f9!important; }}
+  .barfill {{ background:#4d7fae!important;box-shadow:none!important; }}
+  .top .sub code,code {{ background:#f1f5fa!important;color:#123653!important; }}
+  .panel {{ overflow:visible!important;break-inside:avoid; }}
+  .card {{ min-height:0!important; }}
+}}
+
 </style></head><body><main>
-<div class="top"><div><div class="kicker">SALES DATA AUTOMATION · CLIENT DELIVERY SAMPLE</div><h1>From inconsistent files to trusted KPIs</h1><div class="sub">Standalone report generated by Python from <code>sales.csv</code> + <code>customers.xlsx</code>.</div></div><div class="tag">SYNTHETIC DATA ONLY</div></div>
+<div class="top"><div><div class="nexus-sales-brand">
+  <span class="nexus-sales-mark" aria-hidden="true">NX</span>
+  <div><div class="nexus-sales-wordmark">NEXUS</div><div class="nexus-sales-brandline">DATA INTELLIGENCE / CLIENT REPORTING</div></div>
+</div><div class="kicker">SYNTHETIC SALES REPORT · 04 / FINANCIAL OPERATIONS</div><h1>From inconsistent files to trusted KPIs</h1><div class="sub">Standalone report generated by Python from <code>sales.csv</code> + <code>customers.xlsx</code>.</div></div><div class="tag">SYNTHETIC DATA ONLY</div></div>
 <div class="grid">
 <div class="card"><span>Recognized revenue</span><strong>${revenue:,.2f}</strong><small>USD · paid / completed only</small></div>
 <div class="card"><span>Valid sales records</span><strong>{data['valid_rows']:,}</strong><small>{quality_rate:.1f}% of source rows</small></div>
 <div class="card"><span>Excluded records</span><strong>{data['excluded_rows']:,}</strong><small>Every exclusion is logged</small></div>
-<div class="card"><span>Reconciliation</span><strong>{'PASS' if data['reconciliation_passed'] else 'FAIL'}</strong><small>Valid + excluded = {data['source_rows']:,} input rows</small></div>
+<div class="card reconciliation-{'pass' if data['reconciliation_passed'] else 'fail'}"><span>Reconciliation</span><strong>{'PASS' if data['reconciliation_passed'] else 'FAIL'}</strong><small>Valid + excluded = {data['source_rows']:,} input rows</small></div>
 </div>
 <div class="sections"><section class="panel"><h2>Revenue by month</h2>{chart_rows(data['monthly_kpis'],'month')}</section><section class="panel"><h2>Revenue by category</h2>{chart_rows(data['category_kpis'],'category')}</section></div>
 <div class="sections"><section class="panel"><h2>Revenue by segment</h2>{chart_rows(data['segment_kpis'],'segment')}</section><section class="panel"><h2>Quality issues</h2><table><thead><tr><th>Issue</th><th class="num">Affected rows</th></tr></thead><tbody>{issue_rows(data['issues'])}</tbody></table><p class="small">A single rejected record may have multiple issues.</p></section></div>
