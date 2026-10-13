@@ -12,7 +12,7 @@ class NexusReportingDesignTests(unittest.TestCase):
         source = (ROOT / "reporting.py").read_text(encoding="utf-8")
         for name in ("outputs/index.html", "outputs/dashboard.html"):
             html = (ROOT / name).read_text(encoding="utf-8")
-            self.assertIn("NEXUS / SALES DATA INTELLIGENCE", html)
+            self.assertIn("SYNTHETIC SALES REPORT", html)
             self.assertIn("#071829", html)
             self.assertIn("#4ea8ff", html)
             self.assertIn("SYNTHETIC DATA ONLY", html)
