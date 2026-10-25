@@ -1,6 +1,6 @@
 # Excel/CSV Reporting Automation — Paid Pilot Demo
 
-**Reviewer quick brief:** [Project scope, inspectable evidence and limitations](docs/hiring-summary.md).
+**Engineering scope:** [Input/output contract](PILOT_SCOPE.md) · [handoff and test evidence](docs/PILOT_HANDOFF.md).
 
 ![Excel CSV automated reporting workflow](docs/reporting-pipeline.svg)
 
