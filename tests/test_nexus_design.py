@@ -38,7 +38,8 @@ class NexusReportingDesignTests(unittest.TestCase):
             self.assertIn("Print fidelity: later screen colors", report)
             self.assertIn(".card small,.card strong,.barrow b,.barlabel", report)
             self.assertIn("color:#132c44!important", report)
-            self.assertIn(".panel { min-width:0; overflow-x:auto; }", report)
+        self.assertIn(".panel {{ min-width:0; overflow-x:auto; }}", source)
+        self.assertIn(".panel { min-width:0; overflow-x:auto; }", build_html(json.loads((ROOT / "outputs/validation_summary.json").read_text(encoding="utf-8"))))
 
 
     def test_published_nexus_reports_share_one_reproducible_visual(self):
