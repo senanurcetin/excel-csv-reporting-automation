@@ -103,6 +103,31 @@ def test_overlong_csv_record_fails_closed(tmp_path):
         read_sales(sales)
 
 
+def test_unterminated_quoted_csv_field_fails_closed(tmp_path):
+    # The default csv parser silently consumes a truncated quoted record.
+    sales = tmp_path / "bad_quotes.csv"
+    sales.write_text(
+        "order_id,order_date,customer_id,category,quantity,unit_price_usd,status\n"
+        'ORD-1,2026-10-01,CUST-1,"Unclosed category,1,10.00,paid\n',
+        encoding="utf-8",
+    )
+    with pytest.raises(DataQualityError, match="malformed CSV quoting"):
+        read_sales(sales)
+
+
+def test_valid_quoted_multiline_csv_field_is_preserved(tmp_path):
+    sales = tmp_path / "quoted_multiline.csv"
+    sales.write_text(
+        "order_id,order_date,customer_id,category,quantity,unit_price_usd,status\n"
+        'ORD-1,2026-10-01,CUST-1,"Widget\nParts",1,10.00,paid\n',
+        encoding="utf-8", newline="\n",
+    )
+    records = read_sales(sales)
+    assert len(records) == 1
+    assert records[0]["category"] == "Widget\nParts"
+    assert records[0]["unit_price_usd"] == "10.00"
+
+
 def test_csv_formula_injection_protection():
     assert safe_csv_text("=HYPERLINK('evil')").startswith("'")
     assert safe_csv_text("@bad").startswith("'")

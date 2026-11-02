@@ -90,11 +90,15 @@ def read_customers(path: Path) -> dict[str, dict[str, str]]:
 
 def read_sales(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8-sig") as handle:
-        reader = csv.DictReader(handle)
-        if reader.fieldnames is None:
+        reader = csv.DictReader(handle, strict=True)
+        try:
+            fieldnames = reader.fieldnames
+        except csv.Error as exc:
+            raise DataQualityError("sales.csv malformed CSV quoting in header") from exc
+        if fieldnames is None:
             raise DataQualityError("sales.csv is empty")
         # Strip harmless header whitespace, reject ambiguous duplicates.
-        normalized = [clean_text(col).lower() for col in reader.fieldnames]
+        normalized = [clean_text(col).lower() for col in fieldnames]
         if len(set(normalized)) != len(normalized):
             raise DataQualityError("sales.csv has duplicate column names")
         missing = set(SALES_COLUMNS) - set(normalized)
@@ -102,15 +106,19 @@ def read_sales(path: Path) -> list[dict[str, str]]:
             raise DataQualityError(f"sales.csv missing columns: {', '.join(sorted(missing))}")
         reader.fieldnames = normalized
         rows = []
-        for row in reader:
-            # DictReader silently collects overflow values under its None key.
-            # Refuse malformed rows instead of dropping extra source fields.
-            if None in row:
-                raise DataQualityError(
-                    f"sales.csv row ending at line {reader.line_num}: "
-                    "more values than header columns; check delimiters and quoting"
-                )
-            rows.append(dict(row))
+        try:
+            for row in reader:
+                # DictReader puts overflow values under None; never drop them.
+                if None in row:
+                    raise DataQualityError(
+                        f"sales.csv row ending at line {reader.line_num}: "
+                        "more values than header columns; check delimiters and quoting"
+                    )
+                rows.append(dict(row))
+        except csv.Error as exc:
+            raise DataQualityError(
+                f"sales.csv malformed CSV quoting near line {reader.line_num}"
+            ) from exc
         return rows
 
 
