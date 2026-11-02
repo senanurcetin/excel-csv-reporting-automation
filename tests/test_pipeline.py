@@ -73,6 +73,29 @@ def test_bad_schema_fails_fast(tmp_path):
         run_pipeline(path, ROOT / "inputs/customers.xlsx", tmp_path / "out")
 
 
+def test_quality_issue_reports_physical_source_line_after_multiline_and_blank_rows(tmp_path):
+    sales = tmp_path / "multiline-with-invalid.csv"
+    sales.write_text(
+        "order_id,order_date,customer_id,category,quantity,unit_price_usd,status\n"
+        'ORD-GOOD,2026-10-01,C002,"Widget\nParts",1,10.00,paid\n'
+        "\n"
+        "ORD-BAD,2026-10-01,C002,Widgets,not-a-number,10.00,paid\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    # Preserve the read_sales() API for callers who only want source fields.
+    source = read_sales(sales)
+    assert "_csv_row" not in source[0]
+    output = tmp_path / "report"
+    result = run_pipeline(sales, ROOT / "inputs/customers.xlsx", output)
+    issues = load_rows(output / "quality_issues.csv")
+    assert result["source_rows"] == 2
+    assert len(issues) == 1
+    assert issues[0]["order_id"] == "ORD-BAD"
+    assert issues[0]["_csv_row"] == "5"
+    assert "invalid_quantity" in issues[0]["issues"]
+
+
 def test_customers_workbook_rejects_ambiguous_duplicate_headers(tmp_path):
     from openpyxl import Workbook
     from processor import read_customers

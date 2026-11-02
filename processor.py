@@ -88,7 +88,8 @@ def read_customers(path: Path) -> dict[str, dict[str, str]]:
     return customers
 
 
-def read_sales(path: Path) -> list[dict[str, str]]:
+def _read_sales_with_lines(path: Path) -> list[tuple[int, dict[str, str]]]:
+    """Read records and retain their physical CSV start lines for QA evidence."""
     with path.open(newline="", encoding="utf-8-sig") as handle:
         reader = csv.DictReader(handle, strict=True)
         try:
@@ -114,12 +115,24 @@ def read_sales(path: Path) -> list[dict[str, str]]:
                         f"sales.csv row ending at line {reader.line_num}: "
                         "more values than header columns; check delimiters and quoting"
                     )
-                rows.append(dict(row))
+                # DictReader.line_num is the final physical line of a record.
+                # Subtract embedded quoted line breaks to recover its start,
+                # even when blank physical lines appear between records.
+                embedded_lines = sum(
+                    len(re.findall(r"\r\n|\r|\n", value))
+                    for value in row.values() if isinstance(value, str)
+                )
+                rows.append((reader.line_num - embedded_lines, dict(row)))
         except csv.Error as exc:
             raise DataQualityError(
                 f"sales.csv malformed CSV quoting near line {reader.line_num}"
             ) from exc
         return rows
+
+
+def read_sales(path: Path) -> list[dict[str, str]]:
+    """Preserve the public plain-record reader without internal line metadata."""
+    return [record for _, record in _read_sales_with_lines(path)]
 
 
 def validate_sale(raw: dict[str, str], customers: dict[str, dict[str, str]]) -> tuple[dict | None, list[str]]:
@@ -193,12 +206,12 @@ def run_pipeline(sales_path: Path, customers_path: Path, output_dir: Path) -> di
     sales_path, customers_path, output_dir = Path(sales_path), Path(customers_path), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     customers = read_customers(customers_path)
-    raws = read_sales(sales_path)
+    raws = _read_sales_with_lines(sales_path)
 
     staged: list[dict] = []
     excluded: list[dict] = []
     seen_ids: dict[str, list[dict]] = defaultdict(list)
-    for line, raw in enumerate(raws, start=2):
+    for line, raw in raws:
         normalized = {c: clean_text(raw[c]) for c in SALES_COLUMNS}
         normalized["_csv_row"] = line
         # Track all duplicate IDs, including invalid rows, to avoid accidental reuse.
