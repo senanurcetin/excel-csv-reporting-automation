@@ -48,8 +48,16 @@ def read_customers(path: Path) -> dict[str, dict[str, str]]:
     # Only read the workbook; all deliverable data outputs are CSV/HTML/JSON.
     import pandas as pd
 
-    frame = pd.read_excel(path, dtype=str, keep_default_na=False, engine="openpyxl")
-    frame.columns = [clean_text(col).lower() for col in frame.columns]
+    # Read the header as data: pandas automatically renames duplicated Excel
+    # column labels (e.g. customer_id -> customer_id.1), hiding ambiguity.
+    frame = pd.read_excel(path, header=None, dtype=str, keep_default_na=False, engine="openpyxl")
+    if frame.empty:
+        raise DataQualityError("customers.xlsx contains no header or customer records")
+    columns = [clean_text(col).lower() for col in frame.iloc[0]]
+    if len(set(columns)) != len(columns):
+        raise DataQualityError("customers.xlsx has duplicate column names")
+    frame = frame.iloc[1:].copy()
+    frame.columns = columns
     missing = set(CUSTOMER_COLUMNS) - set(frame.columns)
     if missing:
         raise DataQualityError(f"customers.xlsx missing required columns: {', '.join(sorted(missing))}")
