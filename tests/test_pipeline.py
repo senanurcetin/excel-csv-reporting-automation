@@ -73,6 +73,23 @@ def test_bad_schema_fails_fast(tmp_path):
         run_pipeline(path, ROOT / "inputs/customers.xlsx", tmp_path / "out")
 
 
+def test_customers_workbook_rejects_ambiguous_duplicate_headers(tmp_path):
+    from openpyxl import Workbook
+    from processor import read_customers
+
+    workbook = Workbook()
+    worksheet = workbook.active
+    # Pandas normally mangles the second customer_id header to customer_id.1;
+    # silently selecting the first customer identifier is not auditable.
+    worksheet.append(["customer_id", " CUSTOMER_ID ", "customer_name", "segment", "region"])
+    worksheet.append(["CUST-A", "CUST-B", "Sample Customer", "Retail", "North"])
+    path = tmp_path / "ambiguous_customers.xlsx"
+    workbook.save(path)
+
+    with pytest.raises(DataQualityError, match="duplicate column names"):
+        read_customers(path)
+
+
 def test_overlong_csv_record_fails_closed(tmp_path):
     # A dangling delimiter or unquoted comma must not be silently dropped,
     # otherwise a corrupt source row could be accepted as valid revenue.
