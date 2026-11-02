@@ -50,6 +50,23 @@ Custom paths:
 python run_demo.py --sales inputs/sales.csv --customers inputs/customers.xlsx --output outputs
 ```
 
+### Optional data-quality acceptance gate
+
+A pilot can define a maximum acceptable number of excluded source rows. Use the
+local CLI option below to enforce it without deleting the report or issue log:
+
+```bash
+python run_demo.py --max-excluded-rows 8 --output outputs
+```
+
+- Exit **0**: report created and, if specified, the excluded-row threshold passed.
+- Exit **2**: malformed CLI/input schema or missing source file.
+- Exit **3**: report created but excluded rows **exceed** the configured threshold. Review `quality_issues.csv`, `validation_summary.json` and `dashboard.html` before accepting delivery.
+
+The threshold is disabled unless explicitly provided. Use `--max-excluded-rows 0`
+to require every input row to pass validation. The bundled synthetic dataset
+contains eight deliberately excluded rows, so this strict gate will fail on the demo.
+
 ### Input contract
 
 - **Sales CSV:** `order_id,order_date,customer_id,category,quantity,unit_price_usd,status`

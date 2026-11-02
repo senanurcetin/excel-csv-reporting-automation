@@ -19,7 +19,7 @@ import run_demo  # noqa: E402
 
 
 def invoke(monkeypatch, *, sales: Path | None = None, customers: Path | None = None,
-           output: Path | None = None):
+           output: Path | None = None, max_excluded_rows: int | None = None):
     args = ["run_demo.py"]
     if sales is not None:
         args += ["--sales", str(sales)]
@@ -27,6 +27,8 @@ def invoke(monkeypatch, *, sales: Path | None = None, customers: Path | None = N
         args += ["--customers", str(customers)]
     if output is not None:
         args += ["--output", str(output)]
+    if max_excluded_rows is not None:
+        args += ["--max-excluded-rows", str(max_excluded_rows)]
     monkeypatch.setattr(sys, "argv", args)
     return run_demo.main()
 
@@ -95,3 +97,37 @@ def test_cli_honors_custom_sales_customers_and_output_paths(tmp_path, monkeypatc
     assert (output / "cleaned_sales.csv").is_file()
     assert (output / "validation_summary.json").is_file()
     assert captured.err == ""
+
+
+def test_cli_quality_gate_returns_distinct_failure_but_keeps_review_artifacts(
+    tmp_path, monkeypatch, capsys
+):
+    output = tmp_path / "review-output"
+    assert invoke(monkeypatch, output=output, max_excluded_rows=0) == 3
+    printed = capsys.readouterr()
+    summary = json.loads((output / "validation_summary.json").read_text(encoding="utf-8"))
+    assert summary["excluded_rows"] > 0
+    assert (output / "dashboard.html").is_file()
+    assert (output / "quality_issues.csv").is_file()
+    assert "Quality gate: FAIL" in printed.err
+    assert "--max-excluded-rows=0" in printed.err
+    assert f"Open report: {output / 'dashboard.html'}" in printed.out
+
+
+def test_cli_quality_gate_accepts_allowed_exclusions(tmp_path, monkeypatch, capsys):
+    output = tmp_path / "acceptable-output"
+    assert invoke(monkeypatch, output=output, max_excluded_rows=8) == 0
+    printed = capsys.readouterr()
+    assert "Quality gate: PASS" in printed.out
+    assert printed.err == ""
+
+
+def test_cli_quality_gate_rejects_negative_threshold_before_writing(
+    tmp_path, monkeypatch, capsys
+):
+    output = tmp_path / "should-not-exist"
+    with pytest.raises(SystemExit) as exc:
+        invoke(monkeypatch, output=output, max_excluded_rows=-1)
+    assert exc.value.code == 2
+    assert "non-negative" in capsys.readouterr().err
+    assert not output.exists()
