@@ -28,7 +28,7 @@ The hosted page is a static dashboard built from synthetic sample data. To proce
 | `outputs/category_kpis.csv` | Recognized revenue and orders by category |
 | `outputs/monthly_kpis.csv` | Recognized revenue and orders by month |
 | `outputs/segment_kpis.csv` | Recognized revenue and orders by customer segment |
-| `outputs/validation_summary.json` | Machine-readable QA counts, totals, business rules and reconciliation |
+| `outputs/validation_summary.json` | Machine-readable QA counts, totals, business rules, reconciliation, and SHA-256 fingerprints of the input CSV/XLSX bytes |
 | `outputs/quality_gate.json` | Machine-readable acceptance status (`pass`, `fail`, `not_configured`), evaluated limits and violations |
 | `outputs/dashboard.html` | Standalone, print-friendly visual KPI report (no server required) |
 | `tests/` | Repeatable quality tests using pytest |
