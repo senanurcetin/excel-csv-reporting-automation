@@ -8,7 +8,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from processor import DataQualityError, run_pipeline, safe_csv_text  # noqa: E402
+from processor import DataQualityError, read_sales, run_pipeline, safe_csv_text  # noqa: E402
 
 
 def load_rows(path):
@@ -71,6 +71,19 @@ def test_bad_schema_fails_fast(tmp_path):
     path.write_text("order_id,quantity\nA,1\n", encoding="utf-8")
     with pytest.raises(DataQualityError, match="missing columns"):
         run_pipeline(path, ROOT / "inputs/customers.xlsx", tmp_path / "out")
+
+
+def test_overlong_csv_record_fails_closed(tmp_path):
+    # A dangling delimiter or unquoted comma must not be silently dropped,
+    # otherwise a corrupt source row could be accepted as valid revenue.
+    sales = tmp_path / "malformed.csv"
+    sales.write_text(
+        "order_id,order_date,customer_id,category,quantity,unit_price_usd,status\n"
+        "ORD-1,2026-10-01,CUST-1,Widgets,1,10.00,paid,unexpected\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(DataQualityError, match="more values than header columns"):
+        read_sales(sales)
 
 
 def test_csv_formula_injection_protection():

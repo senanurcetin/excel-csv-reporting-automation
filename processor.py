@@ -89,7 +89,17 @@ def read_sales(path: Path) -> list[dict[str, str]]:
         if missing:
             raise DataQualityError(f"sales.csv missing columns: {', '.join(sorted(missing))}")
         reader.fieldnames = normalized
-        return [dict(r) for r in reader]
+        rows = []
+        for row in reader:
+            # DictReader silently collects overflow values under its None key.
+            # Refuse malformed rows instead of dropping extra source fields.
+            if None in row:
+                raise DataQualityError(
+                    f"sales.csv row ending at line {reader.line_num}: "
+                    "more values than header columns; check delimiters and quoting"
+                )
+            rows.append(dict(row))
+        return rows
 
 
 def validate_sale(raw: dict[str, str], customers: dict[str, dict[str, str]]) -> tuple[dict | None, list[str]]:
