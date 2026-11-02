@@ -57,7 +57,17 @@ local CLI option below to enforce it without deleting the report or issue log:
 
 ```bash
 python run_demo.py --max-excluded-rows 8 --output outputs
+# Also limit the share of excluded source rows, using exact decimal percentages:
+python run_demo.py --max-excluded-percent 4.00 --output outputs
+# Enforce both the count and the percentage:
+python run_demo.py --max-excluded-rows 8 --max-excluded-percent 4.00
 ```
+
+The percentage is calculated as `100 × excluded_rows / source_rows`, with no
+floating-point rounding when enforcing the threshold. A header-only source
+containing zero transactions is treated as having a 0% exclusion rate.
+Percentages must be finite numbers from 0 through 100. Both gates must pass
+when configured together.
 
 - Exit **0**: report created and, if specified, the excluded-row threshold passed.
 - Exit **2**: malformed CLI/input schema or missing source file.

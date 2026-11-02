@@ -19,7 +19,8 @@ import run_demo  # noqa: E402
 
 
 def invoke(monkeypatch, *, sales: Path | None = None, customers: Path | None = None,
-           output: Path | None = None, max_excluded_rows: int | None = None):
+           output: Path | None = None, max_excluded_rows: int | None = None,
+           max_excluded_percent: str | None = None):
     args = ["run_demo.py"]
     if sales is not None:
         args += ["--sales", str(sales)]
@@ -29,6 +30,8 @@ def invoke(monkeypatch, *, sales: Path | None = None, customers: Path | None = N
         args += ["--output", str(output)]
     if max_excluded_rows is not None:
         args += ["--max-excluded-rows", str(max_excluded_rows)]
+    if max_excluded_percent is not None:
+        args += ["--max-excluded-percent", max_excluded_percent]
     monkeypatch.setattr(sys, "argv", args)
     return run_demo.main()
 
@@ -131,3 +134,63 @@ def test_cli_quality_gate_rejects_negative_threshold_before_writing(
     assert exc.value.code == 2
     assert "non-negative" in capsys.readouterr().err
     assert not output.exists()
+
+def test_cli_percent_gate_accepts_exact_boundary(tmp_path, monkeypatch, capsys):
+    output = tmp_path / "at-boundary"
+    assert invoke(monkeypatch, output=output, max_excluded_percent="4.00") == 0
+    printed = capsys.readouterr()
+    assert "Quality gate: PASS" in printed.out
+    assert "--max-excluded-percent=4.00" in printed.out
+    assert printed.err == ""
+    assert (output / "quality_issues.csv").exists()
+
+
+def test_cli_percent_gate_fails_below_boundary_and_preserves_reports(
+    tmp_path, monkeypatch, capsys
+):
+    output = tmp_path / "below-boundary"
+    assert invoke(monkeypatch, output=output, max_excluded_percent="3.99") == 3
+    printed = capsys.readouterr()
+    assert "Quality gate: FAIL" in printed.err
+    assert "--max-excluded-percent=3.99" in printed.err
+    assert (output / "validation_summary.json").exists()
+    assert (output / "dashboard.html").exists()
+
+
+def test_cli_combined_gates_require_both_conditions(tmp_path, monkeypatch, capsys):
+    output = tmp_path / "both"
+    assert invoke(monkeypatch, output=output, max_excluded_rows=8,
+                  max_excluded_percent="3.99") == 3
+    assert "--max-excluded-percent=3.99" in capsys.readouterr().err
+    assert invoke(monkeypatch, output=output, max_excluded_rows=7,
+                  max_excluded_percent="4.00") == 3
+    assert "--max-excluded-rows=7" in capsys.readouterr().err
+    assert invoke(monkeypatch, output=output, max_excluded_rows=8,
+                  max_excluded_percent="4.00") == 0
+    assert "Quality gate: PASS" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("bad", ["-1", "100.01", "NaN", "Infinity", "abc"])
+def test_cli_percent_gate_rejects_invalid_values_before_writing(
+    tmp_path, monkeypatch, capsys, bad
+):
+    output = tmp_path / "no-output"
+    with pytest.raises(SystemExit) as exc:
+        invoke(monkeypatch, output=output, max_excluded_percent=bad)
+    assert exc.value.code == 2
+    assert "between 0 and 100" in capsys.readouterr().err
+    assert not output.exists()
+
+
+def test_cli_percent_gate_has_defined_zero_source_row_behavior(
+    tmp_path, monkeypatch, capsys
+):
+    sales = tmp_path / "header-only.csv"
+    sales.write_text(
+        "order_id,order_date,customer_id,category,quantity,unit_price_usd,status\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "zero-rows"
+    assert invoke(monkeypatch, sales=sales, output=output,
+                  max_excluded_percent="0") == 0
+    assert "Quality gate: PASS" in capsys.readouterr().out
