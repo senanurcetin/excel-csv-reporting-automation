@@ -194,3 +194,44 @@ def test_cli_percent_gate_has_defined_zero_source_row_behavior(
     assert invoke(monkeypatch, sales=sales, output=output,
                   max_excluded_percent="0") == 0
     assert "Quality gate: PASS" in capsys.readouterr().out
+
+def test_cli_quality_gate_writes_machine_readable_acceptance_result(
+    tmp_path, monkeypatch, capsys
+):
+    output = tmp_path / "acceptance-failed"
+    assert invoke(monkeypatch, output=output,
+                  max_excluded_rows=8, max_excluded_percent="3.99") == 3
+    report = json.loads((output / "quality_gate.json").read_text(encoding="utf-8"))
+    assert report == {
+        "status": "fail",
+        "source_rows": 200,
+        "excluded_rows": 8,
+        "excluded_percent": "4.00",
+        "thresholds": {"max_excluded_rows": 8, "max_excluded_percent": "3.99"},
+        "violations": [
+            "excluded rate 4.00% exceeds --max-excluded-percent=3.99"
+        ],
+    }
+    assert (output / "dashboard.html").exists()
+
+
+def test_cli_acceptance_json_updates_when_gate_passes(tmp_path, monkeypatch, capsys):
+    output = tmp_path / "repeat"
+    assert invoke(monkeypatch, output=output, max_excluded_rows=7) == 3
+    assert invoke(monkeypatch, output=output, max_excluded_rows=8) == 0
+    report = json.loads((output / "quality_gate.json").read_text(encoding="utf-8"))
+    assert report["status"] == "pass"
+    assert report["thresholds"] == {"max_excluded_rows": 8, "max_excluded_percent": None}
+    assert report["violations"] == []
+
+
+def test_cli_unconfigured_quality_gate_does_not_report_false_acceptance(
+    tmp_path, monkeypatch, capsys
+):
+    output = tmp_path / "baseline"
+    assert invoke(monkeypatch, output=output) == 0
+    report = json.loads((output / "quality_gate.json").read_text(encoding="utf-8"))
+    assert report["status"] == "not_configured"
+    assert report["thresholds"] == {"max_excluded_rows": None, "max_excluded_percent": None}
+    assert report["source_rows"] == 200
+    assert report["excluded_percent"] == "4.00"
