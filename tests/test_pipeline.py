@@ -109,6 +109,15 @@ def test_csv_formula_injection_protection():
     assert safe_csv_text("normal") == "normal"
 
 
+def test_csv_formula_injection_with_invisible_unicode_prefixes():
+    # Importers can disregard zero-width and bidi formatting marks before
+    # interpreting the next visible character as a spreadsheet formula.
+    for prefix in ("\u200b", "\u200d", "\u202e", "\u2060", "\u2066", "\ufeff"):
+        value = prefix + "=1+1"
+        assert safe_csv_text(value) == "'" + value
+    assert safe_csv_text("\u200bordinary") == "\u200bordinary"
+
+
 def test_report_is_deterministic(tmp_path):
     first = run_pipeline(ROOT / "inputs/sales.csv", ROOT / "inputs/customers.xlsx", tmp_path / "a")
     second = run_pipeline(ROOT / "inputs/sales.csv", ROOT / "inputs/customers.xlsx", tmp_path / "b")

@@ -17,7 +17,11 @@ SALES_COLUMNS = (
 CUSTOMER_COLUMNS = ("customer_id", "customer_name", "segment", "region")
 VALID_STATUSES = {"paid", "completed", "refunded", "cancelled"}
 CENTS = Decimal("0.01")
-FORMULA_PREFIXES = ("=", "+", "-", "@", "\t", "\r", "\n")
+# Spreadsheet importers may ignore invisible characters preceding formulas.
+# Keep the original text, but quote cells whose first visible token is an operator.
+FORMULA_PREFIX_PATTERN = re.compile(
+    r"^[\s\x00-\x1f\x7f-\x9f\u200b-\u200f\u202a-\u202e\u2060\u2066-\u2069\ufeff]*[=+\-@]"
+)
 
 
 class DataQualityError(ValueError):
@@ -35,7 +39,7 @@ def identifier(value: object) -> str:
 def safe_csv_text(value: object) -> str:
     """Protect text fields when CSVs are opened in spreadsheet applications."""
     text = clean_text(value)
-    if text and text[0] in FORMULA_PREFIXES:
+    if FORMULA_PREFIX_PATTERN.match(text):
         return "'" + text
     return text
 
