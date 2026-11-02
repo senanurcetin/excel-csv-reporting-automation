@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -84,15 +85,42 @@ def main() -> int:
                     f"excluded rate {actual:.2f}% exceeds "
                     f"--max-excluded-percent={args.max_excluded_percent}"
                 )
+        gate_status = "fail" if violations else "pass"
         if violations:
             print(
                 "Quality gate: FAIL (" + "; ".join(violations)
                 + "; review quality_issues.csv)",
                 file=sys.stderr,
             )
-            return 3
-        print("Quality gate: PASS (" + "; ".join(limits) + ")")
-    return 0
+        else:
+            print("Quality gate: PASS (" + "; ".join(limits) + ")")
+    else:
+        gate_status = "not_configured"
+        violations = []
+    # Recomputed for every CLI run, including an unconfigured run: no stale
+    # acceptance result can survive when an output directory is reused.
+    total = report["source_rows"]
+    excluded = report["excluded_rows"]
+    excluded_pct = Decimal(excluded) * 100 / Decimal(total) if total else Decimal(0)
+    acceptance = {
+        "status": gate_status,
+        "source_rows": total,
+        "excluded_rows": excluded,
+        "excluded_percent": f"{excluded_pct:.2f}",
+        "thresholds": {
+            "max_excluded_rows": args.max_excluded_rows,
+            "max_excluded_percent": (
+                str(args.max_excluded_percent)
+                if args.max_excluded_percent is not None else None
+            ),
+        },
+        "violations": violations,
+    }
+    (args.output / "quality_gate.json").write_text(
+        json.dumps(acceptance, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return 3 if gate_status == "fail" else 0
 
 
 if __name__ == "__main__":
