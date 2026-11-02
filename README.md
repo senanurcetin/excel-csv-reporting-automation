@@ -2,6 +2,9 @@
 
 **Engineering scope:** [Input/output contract](PILOT_SCOPE.md) · [handoff and test evidence](docs/PILOT_HANDOFF.md).
 
+**Project governance:** [Contribution guide](CONTRIBUTING.md) · [Security and data handling](SECURITY.md). This public repository does **not** currently include a LICENSE file; do not infer open-source or white-label reuse rights from its visibility. Licensing and client-specific rights must be agreed explicitly.
+
+
 ![Excel CSV automated reporting workflow](docs/reporting-pipeline.svg)
 
 > This diagram illustrates the data workflow. The paid-pilot sample datasets and entities are **synthetic**, not client data.
