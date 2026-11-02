@@ -161,7 +161,9 @@ def test_pipeline_quarantines_case_insensitive_conflicting_ids(tmp_path, custome
         sale(order_id=" ORD-1 ", category="Software"),
         sale(order_id="ord-2", unit_price_usd="2.00"),
     ])
-    report = processor.run_pipeline(path, tmp_path / "unused.xlsx", tmp_path / "out")
+    workbook = tmp_path / "unused.xlsx"
+    workbook.write_bytes(b"mocked reference workbook for this isolated unit test")
+    report = processor.run_pipeline(path, workbook, tmp_path / "out")
     assert (report["source_rows"], report["valid_rows"], report["excluded_rows"]) == (3, 1, 2)
     assert report["issues"] == {"conflicting_order_id": 2}
     assert report["recognized_revenue_usd"] == "6.00"
@@ -178,7 +180,9 @@ def test_pipeline_keeps_one_case_insensitive_exact_duplicate(tmp_path, customers
         sale(order_id=" ORD-1 ", customer_id=" c-1 ", category=" HARDWARE ",
              status="PAID"),
     ])
-    report = processor.run_pipeline(path, tmp_path / "unused.xlsx", tmp_path / "out")
+    workbook = tmp_path / "unused.xlsx"
+    workbook.write_bytes(b"mocked reference workbook for this isolated unit test")
+    report = processor.run_pipeline(path, workbook, tmp_path / "out")
     assert (report["valid_rows"], report["excluded_rows"]) == (1, 1)
     assert report["issues"] == {"exact_duplicate_order_id": 1}
     assert report["recognized_revenue_usd"] == "3.75"

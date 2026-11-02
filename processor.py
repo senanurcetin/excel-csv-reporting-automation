@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import re
 from collections import Counter, defaultdict
@@ -46,6 +47,15 @@ def safe_csv_text(value: object) -> str:
 
 def money(value: Decimal) -> str:
     return str(value.quantize(CENTS, rounding=ROUND_HALF_UP))
+
+
+def hash_source_file(path: Path) -> str:
+    """Calculate a fingerprint of the original file bytes without loading it all."""
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def read_customers(path: Path) -> dict[str, dict[str, str]]:
@@ -270,6 +280,10 @@ def run_pipeline(sales_path: Path, customers_path: Path, output_dir: Path) -> di
         issue_counts.update(row["issues"].split(";"))
 
     report: dict = {
+        "source_sha256": {
+            "sales_csv": hash_source_file(sales_path),
+            "customers_xlsx": hash_source_file(customers_path),
+        },
         "source_rows": len(raws),
         "valid_rows": len(accepted),
         "excluded_rows": len(excluded),
