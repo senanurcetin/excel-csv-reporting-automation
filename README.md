@@ -2,7 +2,7 @@
 
 **Engineering scope:** [Input/output contract](PILOT_SCOPE.md) · [handoff and test evidence](docs/PILOT_HANDOFF.md).
 
-**Project governance:** [Contribution guide](CONTRIBUTING.md) · [Security and data handling](SECURITY.md). This public repository does **not** currently include a LICENSE file; do not infer open-source or white-label reuse rights from its visibility. Licensing and client-specific rights must be agreed explicitly.
+**Project governance:** [Contribution guide](CONTRIBUTING.md) · [Security and data handling](SECURITY.md). **License:** all rights reserved — the code is published for review, not as open source. Commercial or white-label use needs a written agreement.
 
 
 ![Excel CSV automated reporting workflow](docs/reporting-pipeline.svg)
